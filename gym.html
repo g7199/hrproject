@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style>
+    #map_view {
+      position: absolute;
+      left: 900px;
+      top: 36px;
+    }
+    #img_hr {
+      position: absolute;
+      left: 980px;
+      top: 330px;
+    }
+    #menu {
+      margin-left: 20px;
+    }
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script>
+  function initialize() {
+
+  /*
+  http://openapi.map.naver.com/api/geocode.php?key=f32441ebcd3cc9de474f8081df1e54e3&encoding=euc-kr&coord=LatLng&query=서울특별시 노원구 섬밭로 258
+  위의 링크에서 뒤에 주소를 적으면 x,y 값을 구할수 있습니다.
+  */
+  var Y_point = 35.269139; // Y 좌표
+  var X_point = 126.512751; // X 좌표
+  var zoomLevel = 17; // 첫 로딩시 보일 지도의 확대 레벨
+  var markerTitle = "토다이 중계점"; // 현재 위치 마커에 마우스를 올렸을때 나타나는 이름
+  var markerMaxWidth = 300; // 마커를 클릭했을때 나타나는 말풍선의 최대 크기
+
+  // 말풍선 내용
+  var contentString = '<div id="content">' +
+  '<div id="siteNotice">' +
+  '</div>' +
+  '<h3 id="firstHeading" class="firstHeading">해룡고등학교</h3>' +
+  '<div id="bodyContent">' +
+  '<p>전라남도 영광군 영광읍 중앙로 120<br />' +
+  'Tel. Tel 061) 350-1105</p>' +
+  '</div>' +
+  '</div>';
+
+  var myLatlng = new google.maps.LatLng(Y_point, X_point);
+  var mapOptions = {
+  zoom: zoomLevel,
+  center: myLatlng,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  var map = new google.maps.Map(document.getElementById('map_view'), mapOptions);
+
+  var marker = new google.maps.Marker({
+  position: myLatlng,
+  map: map,
+  title: markerTitle
+  });
+
+  var infowindow = new google.maps.InfoWindow(
+  {
+  content: contentString,
+  maxWidth: markerMaxWidth
+  }
+  );
+
+  google.maps.event.addListener(marker, 'click', function() {
+  infowindow.open(map, marker);
+  });
+  }
+  </script>
+
+  <style>
+  #myPanoViewer {
+    position: relative; /* 반드시 relative 혹은absolute 를 지정합니다.*/
+     width: 868px;
+    height: 588px;
+    margin-left: 20px;
+  }
+  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"></script>
+</head>
+<body onload="initialize()">
+  <div class="ui sidebar fixed vertical menu">
+    <a class="item" href="index.html">
+      운동장
+    </a>
+    <a class="item" href="main.html">
+      본관
+    </a>
+    <a class="item" href="inmain.html">
+      본관 내부
+    </a>
+    <a class="item" href="auditorium.html">
+      강당
+    </a>
+    <a class="item" href="dormitory.html">
+      남자기숙사
+    </a>
+    <a class="item" href="dormitory2.html">
+      여자기숙사
+    </a>
+    <a class="item" href="cafeteria.html">
+      급식실
+    </a>
+    <a class="item" href="firstgrade.html">
+      적공관
+    </a>
+    <a class="item" href="infirstgrade.html">
+      적공관 내부
+    </a>
+    <a class="item" href="gym.html">
+      체육관
+    </a>
+    <a class="item" href="ingym.html">
+      체육관 내부
+    </a>
+    <a class="item" href="library.html">
+      지산관
+    </a>
+    <a class="item" href="inlibrary.html">
+      도서관
+    </a>
+    <a class="item" href="debate.html">
+      토론실
+    </a>
+    <a class="item" href="deep.html">
+      심화학습반
+    </a>
+    <a class="item" href="science.html">
+      과학동
+    </a>
+    <a class="item" href="inscience.html">
+      과학실 내부
+    </a>
+    <a class="item" href="sunshine.html">
+      햇빛촌
+    </a>
+  </div>
+  <div class="pusher">
+    <!-- Site content !-->
+    <div class="pusher">
+       <button id="menu" class="ui inverted olive icon button"> <i class= "list icon"> </i></button>
+    </div>
+<div id="myPanoViewer"></div>
+<div id="map_view" style="width:450px; height:270px;"></div>
+<img id="img_hr" src="https://raw.githubusercontent.com/g7199/hrproject/master/%EC%9E%90%EC%9C%A8%EB%8F%99%EC%95%84%EB%A6%AC%20%EB%A9%94%EC%9D%B8%ED%99%94%EB%A9%B4%20white.jpg" width = "270px", height = "270px">
+</div>
+<script src="view360.panoviewer.pkgd.min.js"></script>
+<script>
+// create PanoViewer with option
+var PanoViewer = eg.view360.PanoViewer;
+var container = document.getElementById("myPanoViewer");// 이미지가 표시될 영역(HTMLElement)
+
+var panoViewer = new PanoViewer(container, {
+            // projectionType 을 지정하지 않는 경우 기본값은 "equirectangular" 이다.
+            image: "https://raw.githubusercontent.com/g7199/hrproject/master/%EC%B2%B4%EC%9C%A1%EA%B4%80.JPG" // "equirectangular" 타입의 이미지를 지정한다.
+      }
+);
+</script>
+<script>
+$('#menu').click(function(){
+           $('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
+       })
+</script>
+</body>
+</html>
